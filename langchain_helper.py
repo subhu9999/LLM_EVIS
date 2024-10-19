@@ -8,8 +8,8 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain.prompts import PromptTemplate
 
-if "GOOGLE_API_KEY" not in os.environ:
-    os.environ["GOOGLE_API_KEY"] = KEYS.GOOGLE_API_KEY
+# if "GOOGLE_API_KEY" not in os.environ:
+#     os.environ["GOOGLE_API_KEY"] = KEYS.GOOGLE_API_KEY
 
 
 llm = ChatGoogleGenerativeAI(

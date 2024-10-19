@@ -4,3 +4,4 @@ langchain_community
 torch
 sentence_transformers==2.2.2
 faiss-cpu
+streamlit
