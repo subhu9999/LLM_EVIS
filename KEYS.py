@@ -1,1 +1,1 @@
-GOOGLE_API_KEY = "AIzaSy-test"
+GOOGLE_API_KEY = "AIzaSyCzGX3FyOdiP6GIlWizg4vaEnAHoeUiLPU"
