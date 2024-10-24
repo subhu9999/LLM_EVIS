@@ -1,5 +1,5 @@
 import os
-import KEYS
+
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.document_loaders.csv_loader import CSVLoader
 from langchain_community.embeddings import HuggingFaceInstructEmbeddings
@@ -8,8 +8,9 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain.prompts import PromptTemplate
 
+# import KEYS
 # if "GOOGLE_API_KEY" not in os.environ:
-#     os.environ["GOOGLE_API_KEY"] = KEYS.GOOGLE_API_KEY
+#      os.environ["GOOGLE_API_KEY"] = KEYS.GOOGLE_API_KEY
 
 
 llm = ChatGoogleGenerativeAI(
@@ -21,7 +22,7 @@ llm = ChatGoogleGenerativeAI(
 instructor_embeddings = HuggingFaceInstructEmbeddings(
     query_instruction="Represent the query for retrieval: "
 )
-vectordb_filepath="faiss_index_evis"
+vectordb_filepath="faiss_index_final"
 
 def create_vector_db():
     loader = CSVLoader(file_path=r"G:\sk_ai\merged_final.csv", source_column="prompt")
@@ -34,15 +35,27 @@ def get_qa_chain():
 
     # For local usage
     # Define a custom prompt template locally
+    # prompt_template = PromptTemplate(
+    #     input_variables=["company", "context", "question"],
+    #     #template="You are a helpful assistant. Given the following context:\n\n{context}\n\nAnswer the question: {question}"
+    #     template=(
+    #         "You are a customer support representative for {company}. "
+    #         "Your goal is to assist the customer with any issues they have, "
+    #         "using the following context:\n\n{context}\n\n"
+    #         "Please provide a helpful and polite response to the customer's question: {question}."
+    #     )
+    # )
+
     prompt_template = PromptTemplate(
-        #input_variables=["context", "question"],
         input_variables=["company", "context", "question"],
-        #template="You are a helpful assistant. Given the following context:\n\n{context}\n\nAnswer the question: {question}"
         template=(
             "You are a customer support representative for {company}. "
             "Your goal is to assist the customer with any issues they have, "
             "using the following context:\n\n{context}\n\n"
-            "Please provide a helpful and polite response to the customer's question: {question}."
+            "Please provide a helpful and polite response to the customer's current question: {question}. "
+            "If you are unable to answer the question based on the provided context, "
+            "kindly respond with: 'I'm sorry, I don't have the information right now. "
+            "You can contact expert support team at evis@support.com.au for further assistance.'"
         )
     )
 
