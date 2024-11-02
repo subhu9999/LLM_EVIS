@@ -13,6 +13,7 @@ import streamlit as st
 # download_nltk_punkt()
 
 nltk.download('punkt')
+nltk.download('punkt_tab')
 
 # List of common question words
 question_words = {'who', 'what', 'where', 'when', 'why', 'how', 'is', 'are', 'do', 'does', 'can', 'could', 'would',
