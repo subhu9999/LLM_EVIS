@@ -5,12 +5,14 @@ import streamlit as st
 
 #nltk.download('punkt')
 
-@st.cache_resource
-def download_nltk_punkt():
-    nltk.download('punkt')
+# @st.cache_resource
+# def download_nltk_punkt():
+#     nltk.download('punkt')
 
 # Only download 'punkt' once
-download_nltk_punkt()
+# download_nltk_punkt()
+
+nltk.download('punkt')
 
 # List of common question words
 question_words = {'who', 'what', 'where', 'when', 'why', 'how', 'is', 'are', 'do', 'does', 'can', 'could', 'would',
